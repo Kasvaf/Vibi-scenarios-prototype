@@ -40,10 +40,19 @@ vibi/
 
 ## Getting Started
 
-1. Clone this repository
-2. Explore the `/scenarios` folder to see example conversations
-3. Check `/docs` for conversation design principles
-4. Run the simulation interface (coming soon)
+### For Product/Design Review:
+1. Read `AI-TRAINING-GUIDE.md` for complete overview
+2. Explore `/scenarios` folder to see example conversations
+3. Check `/docs` for detailed conversation design principles
+
+### For AI Training/Transfer:
+1. **Start with** `AI-TRAINING-GUIDE.md` - Complete knowledge consolidation
+2. **Then read** `docs/conversation-design-guide.md` - Personality details
+3. **Study** 2-3 scenarios from `/scenarios` - See principles in action
+4. **Reference** remaining scenarios as needed
+
+### For Development:
+- Run the simulation interface (coming soon)
 
 ## Development Team
 
