@@ -73,15 +73,79 @@ This folder contains complete conversation scenarios demonstrating how Vibi inte
 
 ---
 
+### 6. [I'm Bored](./06-im-bored.md)
+**Use Case**: Vague emotional state, needs inspiration
+**User Mood**: Low energy, indecisive, unmotivated
+**Conversation Style**: Supportive, progressive narrowing
+**Key Feature**: Addressing psychological need, not just activity
+
+**What It Demonstrates**:
+- Emotional intelligence (recognizing low motivation)
+- Decision support for indecisive users
+- Solo activity normalization
+- Root cause addressing (change of scenery)
+- Energy matching
+
+---
+
+### 7. [Girls Night Out - Offers](./07-girls-night-offers.md)
+**Use Case**: Group outing focused on deals/promotions
+**User Mood**: Fun, social, budget-conscious
+**Conversation Style**: Enthusiastic, strategic
+**Key Feature**: Dubai ladies' night optimization
+
+**What It Demonstrates**:
+- Dubai-specific cultural knowledge (Tuesday ladies' nights)
+- Deal optimization and multi-venue strategy
+- Transparency about trade-offs (house drinks, crowds)
+- Group dynamics consideration
+- Promotional awareness
+
+---
+
+### 8. [Girlfriend Date Night](./08-girlfriend-date-night.md)
+**Use Case**: Romantic date planning
+**User Mood**: Wants to impress, slightly nervous
+**Conversation Style**: Supportive, confidence-building
+**Key Feature**: Partner-focused recommendations
+
+**What It Demonstrates**:
+- Stakeholder awareness (her preferences over his)
+- Romance expertise (lighting, ambiance, table location)
+- Confidence coaching
+- Practical stress reduction (parking, dress code)
+- Success-oriented guidance
+
+---
+
+### 9. [Luxury High-End Clubs](./09-luxury-high-end.md)
+**Use Case**: Premium nightlife experience
+**User Mood**: Confident, expects exclusivity
+**Conversation Style**: Sophisticated, tier-appropriate
+**Key Feature**: VIP access and luxury market knowledge
+
+**What It Demonstrates**:
+- Tier flexibility (adapts to luxury expectations)
+- Dubai premium nightlife expertise
+- Price transparency (real costs vs minimums)
+- VIP dynamics (hosts, door politics, table hierarchy)
+- Honest guidance without judgment
+
+---
+
 ## Scenario Comparison Matrix
 
-| Scenario | Pace | Control | Complexity | Planning Horizon |
-|----------|------|---------|------------|------------------|
-| Tonight Plans | Fast | Collaborative | Simple | Immediate (hours) |
-| Lazy Sunday | Slow | User-led | Simple | Same day |
-| Birthday Party | Medium | Consultative | Complex | 2 weeks ahead |
-| First Time Dubai | Medium | Collaborative | Complex | Full week |
-| Surprise Me | Fast | Vibi-led | Medium | Immediate (hours) |
+| Scenario | Pace | Control | Complexity | Planning Horizon | Budget Tier |
+|----------|------|---------|------------|------------------|-------------|
+| Tonight Plans | Fast | Collaborative | Simple | Immediate (hours) | Mid-range |
+| Lazy Sunday | Slow | User-led | Simple | Same day | Budget-friendly |
+| Birthday Party | Medium | Consultative | Complex | 2 weeks ahead | Mid-range |
+| First Time Dubai | Medium | Collaborative | Complex | Full week | Mixed |
+| Surprise Me | Fast | Vibi-led | Medium | Immediate (hours) | Mid-range |
+| I'm Bored | Medium | Supportive | Simple | Same day | Free-Low |
+| Girls Night Offers | Fast | Strategic | Medium | Same evening | Budget-conscious |
+| Girlfriend Date | Medium | Confidence-building | Medium | Same evening | Mid-range |
+| Luxury High-End | Fast | Sophisticated | Medium | Same evening | Premium (10k+) |
 
 ---
 
@@ -120,6 +184,10 @@ Minimal questions → Bold plan → Justification → Buy-in check
 3. **The Planner** (Birthday Party) - Specific occasion, multiple requirements
 4. **The Tourist** (First Time Dubai) - New to city, wants comprehensive guidance
 5. **The Adventurer** (Surprise Me) - Trusts Vibi, wants novelty
+6. **The Unmotivated** (I'm Bored) - Needs inspiration and decision support
+7. **The Deal Seeker** (Girls Night) - Value-conscious, group dynamics
+8. **The Romantic** (Girlfriend Date) - Wants to impress, needs confidence
+9. **The VIP** (Luxury High-End) - Premium expectations, exclusivity-focused
 
 ---
 
@@ -201,14 +269,29 @@ Vibi considers:
 
 ---
 
-## Next Steps
+## Additional Scenario Ideas
 
-Potential additional scenarios:
+Potential future scenarios to demonstrate edge cases:
 - **Emergency/Problem Solving**: "The restaurant lost my reservation"
 - **Group Disagreement**: "My friends can't decide where to go"
-- **Budget Constraints**: "What can I do with 50 AED?"
+- **Extreme Budget**: "What can I do with 50 AED?"
 - **Dietary Restrictions**: "I'm vegan, where can I eat?"
-- **Romantic Date**: "Planning a first date, help!"
+- **First Date**: "Planning a first date with someone I just met"
 - **Family with Kids**: "Things to do with children in Dubai"
+- **Business Dinner**: "I need to impress a client"
+- **Visiting Friend**: "My friend is visiting, what should we do?"
 
 Each would demonstrate different aspects of Vibi's conversational intelligence.
+
+---
+
+## Current Coverage
+
+With 9 scenarios, we've covered:
+- ✅ Various budget tiers (free to 20k+ AED)
+- ✅ Different social contexts (solo, couples, groups)
+- ✅ Multiple moods (energetic, lazy, nervous, confident)
+- ✅ Planning horizons (same day to weeks ahead)
+- ✅ Dubai-specific knowledge (ladies' nights, tourist spots, luxury scene)
+- ✅ Emotional states (bored, excited, anxious)
+- ✅ Conversation control levels (user-led to Vibi-led)
