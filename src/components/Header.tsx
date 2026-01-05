@@ -1,0 +1,40 @@
+import { Bot } from 'lucide-react';
+
+interface HeaderProps {
+  scenarioTitle: string;
+  onReset: () => void;
+  showReasoning: boolean;
+  onToggleReasoning: () => void;
+}
+
+export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasoning }: HeaderProps) {
+  return (
+    <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 shadow-lg">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Bot className="w-8 h-8" />
+          <div>
+            <h1 className="text-2xl font-bold">Vibi Simulator</h1>
+            {scenarioTitle && (
+              <p className="text-sm text-blue-100">Scenario: {scenarioTitle}</p>
+            )}
+          </div>
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={onToggleReasoning}
+            className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg text-sm transition-colors"
+          >
+            {showReasoning ? 'Hide' : 'Show'} Reasoning
+          </button>
+          <button
+            onClick={onReset}
+            className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg text-sm transition-colors"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
