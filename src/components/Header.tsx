@@ -1,4 +1,4 @@
-import { Bot } from 'lucide-react';
+import { Bot, Settings } from 'lucide-react';
 
 interface HeaderProps {
   scenarioTitle: string;
@@ -6,9 +6,10 @@ interface HeaderProps {
   showReasoning: boolean;
   onToggleReasoning: () => void;
   userName?: string;
+  onEditProfile?: () => void;
 }
 
-export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasoning, userName }: HeaderProps) {
+export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasoning, userName, onEditProfile }: HeaderProps) {
   return (
     <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 shadow-lg">
       <div className="flex items-center justify-between">
@@ -24,6 +25,16 @@ export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasonin
           </div>
         </div>
         <div className="flex gap-2">
+          {userName && onEditProfile && (
+            <button
+              onClick={onEditProfile}
+              className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg text-sm transition-colors flex items-center gap-2"
+              title="Edit Profile"
+            >
+              <Settings size={16} />
+              Edit Profile
+            </button>
+          )}
           <button
             onClick={onToggleReasoning}
             className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg text-sm transition-colors"

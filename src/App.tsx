@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { ScenarioSelector } from './components/ScenarioSelector';
 import { ChatContainer } from './components/ChatContainer';
 import { OnboardingFlow } from './components/onboarding/OnboardingFlow';
+import { ProfileEditor } from './components/ProfileEditor';
 import { scenarios } from './data/scenarios';
 import { Message, ConversationStep, UserProfile } from './types';
 import { loadProfile, updateProfile } from './utils/profileStorage';
@@ -11,6 +12,7 @@ function App() {
   // User profile and onboarding state
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showProfileEditor, setShowProfileEditor] = useState(false);
 
   // Scenario state
   const [selectedScenarioId, setSelectedScenarioId] = useState<string | null>(null);
@@ -146,6 +148,15 @@ function App() {
     setShowOnboarding(false);
   };
 
+  const handleEditProfile = () => {
+    setShowProfileEditor(true);
+  };
+
+  const handleProfileUpdate = (updatedProfile: UserProfile) => {
+    setUserProfile(updatedProfile);
+    setShowProfileEditor(false);
+  };
+
   // Show onboarding flow for first-time users
   if (showOnboarding) {
     return <OnboardingFlow onComplete={handleOnboardingComplete} />;
@@ -153,27 +164,39 @@ function App() {
 
   // Main app for users with profiles
   return (
-    <div className="h-screen flex flex-col bg-gray-100">
-      <Header
-        scenarioTitle={selectedScenario?.title || ''}
-        onReset={handleReset}
-        showReasoning={showReasoning}
-        onToggleReasoning={handleToggleReasoning}
-        userName={userProfile?.name}
-      />
-      <ScenarioSelector
-        scenarios={scenarios}
-        selectedScenarioId={selectedScenarioId}
-        onSelectScenario={handleSelectScenario}
-      />
-      <ChatContainer
-        messages={messages}
-        userOptions={userOptions}
-        onSelectOption={handleSelectOption}
-        showReasoning={showReasoning}
-        isWaitingForResponse={isWaitingForResponse}
-      />
-    </div>
+    <>
+      <div className="h-screen flex flex-col bg-gray-100">
+        <Header
+          scenarioTitle={selectedScenario?.title || ''}
+          onReset={handleReset}
+          showReasoning={showReasoning}
+          onToggleReasoning={handleToggleReasoning}
+          userName={userProfile?.name}
+          onEditProfile={handleEditProfile}
+        />
+        <ScenarioSelector
+          scenarios={scenarios}
+          selectedScenarioId={selectedScenarioId}
+          onSelectScenario={handleSelectScenario}
+        />
+        <ChatContainer
+          messages={messages}
+          userOptions={userOptions}
+          onSelectOption={handleSelectOption}
+          showReasoning={showReasoning}
+          isWaitingForResponse={isWaitingForResponse}
+        />
+      </div>
+
+      {/* Profile Editor Modal */}
+      {showProfileEditor && userProfile && (
+        <ProfileEditor
+          profile={userProfile}
+          onClose={() => setShowProfileEditor(false)}
+          onSave={handleProfileUpdate}
+        />
+      )}
+    </>
   );
 }
 
