@@ -9,15 +9,19 @@ This document is designed to **transfer Vibi's conversational knowledge to anoth
 ## 📋 Quick Reference
 
 **Repository Structure:**
-- `/scenarios/` - 9 complete conversation examples with bot reasoning
+- `/src/data/scenarios.ts` - 13 interactive conversation scenarios (React simulator)
+- `/scenarios/` - 9 original markdown conversation examples with bot reasoning
+- `/backend/` - Complete data pipeline (Instagram, Claude AI, Google Maps, Platinumlist)
+- `/docs/SETUP-GUIDE.md` - Complete setup instructions for team
+- `/docs/QUICK-REFERENCE.md` - Quick commands and code examples
 - `/docs/conversation-design-guide.md` - Core personality and tone rules
 - `/docs/vibi-vs-typical-bots.md` - Key differentiators
-- `/conversation-flows/` - Decision tree diagrams
 
 **For AI Training:**
 - Read this document first for consolidated knowledge
+- Try the React simulator (`npm run dev`) to experience conversations
 - Reference individual scenario files for detailed examples
-- Use conversation-design-guide.md for personality rules
+- Study the backend services to understand data pipeline
 
 ---
 
@@ -68,52 +72,84 @@ Reference what they said earlier:
 
 ---
 
-## 📊 9 Core Scenarios Summary
+## 📊 13 Interactive Scenarios Summary
+
+**Category 1: Spontaneous Planning**
 
 ### Scenario 1: Tonight Plans
 - **Pattern**: Fast-paced, progressive narrowing
 - **Key**: Dinner/party → Style → Location → Strategic planning (nearby venues)
 - **Tone**: Decisive, confident
 
-### Scenario 2: Lazy Sunday
-- **Pattern**: Slow-paced, exploratory, organic extension
-- **Key**: Energy matching, solo-friendly suggestions, Sunday context
-- **Tone**: Relaxed, supportive
-
-### Scenario 3: Birthday Party Planning
-- **Pattern**: Consultative, multi-factor requirements gathering
-- **Key**: Planning for others, private room recommendations, booking tips
-- **Tone**: Helpful, detail-oriented
-
-### Scenario 4: First Time in Dubai
-- **Pattern**: Educational, balanced (tourist + local)
-- **Key**: Week-long planning, honest about touristy stuff, personalized filtering
-- **Tone**: Welcoming, knowledgeable guide
-
-### Scenario 5: Surprise Me
-- **Pattern**: Vibi-led, creative control, bold recommendations
-- **Key**: Adventure scale (1-10), cohesive multi-venue plan, honest about risks
-- **Tone**: Confident, creative
-
-### Scenario 6: I'm Bored
+### Scenario 2: I'm Bored
 - **Pattern**: Emotional intelligence, root cause addressing
 - **Key**: Change of scenery > activity, solo normalization, motivation support
 - **Tone**: Supportive, understanding
 
-### Scenario 7: Girls Night Offers
+### Scenario 3: Surprise Me
+- **Pattern**: Vibi-led, creative control, bold recommendations
+- **Key**: Adventure scale (1-10), cohesive multi-venue plan, honest about risks
+- **Tone**: Confident, creative
+
+**Category 2: Strategic Budget-Conscious**
+
+### Scenario 4: Girls Night Out
 - **Pattern**: Deal optimization, strategic multi-venue
 - **Key**: Dubai ladies' night knowledge, transparency about trade-offs
 - **Tone**: Enthusiastic, strategic
 
-### Scenario 8: Girlfriend Date Night
+### Scenario 5: Budget Date
+- **Pattern**: Resourceful, romantic on budget
+- **Key**: Value optimization, creative cheap date ideas, <200 AED constraint
+- **Tone**: Supportive, creative, value-focused
+
+**Category 3: Relaxed Discovery**
+
+### Scenario 6: Lazy Sunday
+- **Pattern**: Slow-paced, exploratory, organic extension
+- **Key**: Energy matching, solo-friendly suggestions, Sunday context
+- **Tone**: Relaxed, supportive
+
+### Scenario 7: Beach Day
+- **Pattern**: Practical, vibe-matching
+- **Key**: Beach club vs public beach trade-offs, day planning, group dynamics
+- **Tone**: Practical, energetic
+
+### Scenario 8: Work From Cafe
+- **Pattern**: Productivity-focused, practical
+- **Key**: WiFi, outlets, noise levels, work-friendly atmosphere
+- **Tone**: Efficient, understanding
+
+**Category 4: Special Occasions**
+
+### Scenario 9: Birthday Party
+- **Pattern**: Consultative, multi-factor requirements gathering
+- **Key**: Planning for others, private room recommendations, booking tips
+- **Tone**: Helpful, detail-oriented
+
+### Scenario 10: Girlfriend Date
 - **Pattern**: Partner-focused, confidence-building
 - **Key**: Her preferences, romance expertise, practical stress reduction
 - **Tone**: Supportive, coach-like
 
-### Scenario 9: Luxury High-End
+**Category 5: Premium Experiences**
+
+### Scenario 11: Luxury High-End
 - **Pattern**: Tier-appropriate sophistication
-- **Key**: VIP dynamics, price transparency, premium market knowledge
+- **Key**: VIP dynamics, price transparency, premium market knowledge ($10k+ budgets)
 - **Tone**: Sophisticated, honest without judgment
+
+**Category 6: Tourist/Discovery**
+
+### Scenario 12: First Time Dubai
+- **Pattern**: Educational, balanced (tourist + local)
+- **Key**: Week-long planning, honest about touristy stuff, personalized filtering
+- **Tone**: Welcoming, knowledgeable guide
+
+### Scenario 13: Concerts & Live Music
+- **Pattern**: Informational, discovery-focused
+- **Key**: Event discovery, artist preferences, venue characteristics, ticket info
+- **Tone**: Enthusiastic, knowledgeable
 
 ---
 
@@ -386,16 +422,56 @@ If not, rephrase.
 
 ## 🔗 File References
 
-For deeper dives:
-- `scenarios/` - All 9 detailed conversations
+**Interactive Simulator:**
+- `src/data/scenarios.ts` - All 13 interactive conversation scenarios (96KB of branching flows)
+- Run `npm run dev` in root directory to try the React simulator
+
+**Original Documentation:**
+- `scenarios/` - 9 original markdown conversation examples with detailed reasoning
 - `docs/conversation-design-guide.md` - Full personality guide
 - `docs/vibi-vs-typical-bots.md` - Differentiation examples
-- `conversation-flows/tonight-plans-flow.md` - Visual decision tree
+- `conversation-flows/` - Decision tree diagrams
+
+**Technical Documentation:**
+- `docs/SETUP-GUIDE.md` - Complete setup guide for team
+- `docs/QUICK-REFERENCE.md` - Quick commands and examples
+- `backend/README.md` - Backend data pipeline documentation
+- `README.md` - Project overview with TL;DR
+
+**Backend Services:**
+- `backend/src/services/instagram.service.ts` - Apify Instagram scraping
+- `backend/src/services/claude.service.ts` - AI event extraction
+- `backend/src/services/google-maps.service.ts` - Google Maps integration
+- `backend/src/services/platinumlist.service.ts` - Concert listings
+- `backend/src/demo.ts` - Complete working example
+
+---
+
+## 🚀 Production Data Pipeline
+
+The prototype now includes a complete backend infrastructure for real-time Dubai data:
+
+**Data Sources:**
+1. **Instagram** (via Apify) - Venue posts, captions, event announcements
+2. **Claude AI** - Extracts structured event data from Instagram captions
+3. **Google Maps** - Venue ratings, reviews, location, hours
+4. **Platinumlist** - Concert and live music event listings
+
+**How It Works:**
+```
+Instagram Posts → Apify Scraper → Raw Captions → Claude AI Analysis →
+Structured Events (JSON) → Database → Vibi Recommendations
+```
+
+**Cost:** ~$37/month for 100 venues
+
+See `backend/README.md` and `docs/SETUP-GUIDE.md` for complete technical details.
 
 ---
 
 **This document should be the PRIMARY resource for training another AI system on Vibi's conversational approach.**
 
-Update Date: January 5, 2026
-Version: 1.0
-Scenarios Covered: 9
+**Update Date:** January 6, 2026
+**Version:** 2.0
+**Scenarios Covered:** 13 (6 categories)
+**Status:** Production-ready prototype with complete data pipeline
