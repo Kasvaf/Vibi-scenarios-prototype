@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Message } from '../types';
+import { Message, UserProfile } from '../types';
 import { MessageBubble } from './MessageBubble';
 import { UserOptions } from './UserOptions';
 
@@ -9,6 +9,7 @@ interface ChatContainerProps {
   onSelectOption: (option: string) => void;
   showReasoning: boolean;
   isWaitingForResponse: boolean;
+  userProfile?: UserProfile | null;
 }
 
 export function ChatContainer({
@@ -17,6 +18,7 @@ export function ChatContainer({
   onSelectOption,
   showReasoning,
   isWaitingForResponse,
+  userProfile,
 }: ChatContainerProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +43,7 @@ export function ChatContainer({
               key={message.id}
               message={message}
               showReasoning={showReasoning}
+              userProfile={userProfile}
             />
           ))}
           {!isWaitingForResponse && userOptions.length > 0 && (

@@ -17,8 +17,8 @@ export const scenarios: Scenario[] = [
       {
         id: 'step1',
         userMessage: 'Hey Vibi, I\'m trying to figure out where to go tonight. Any ideas?',
-        vibiResponse: 'Hey Sarah! Thursday vibes, I love it. Quick question - are we talking dinner and drinks or straight to party mode?',
-        vibiReasoning: 'Acknowledged the user warmly, immediately narrowed down the two main categories, kept it casual and conversational',
+        vibiResponse: '{tone:greeting} Thursday vibes, {tone:encouragement}. Quick question - are we talking dinner and drinks or straight to party mode?',
+        vibiReasoning: 'Acknowledged the user warmly with personalized greeting and tone, immediately narrowed down the two main categories, kept it casual and conversational',
         userOptions: ['Dinner and drinks', 'Party mode', 'Maybe dinner first then see where the night goes?'],
         nextStepMap: {
           'Dinner and drinks': 'step2-dinner',
@@ -29,8 +29,8 @@ export const scenarios: Scenario[] = [
       {
         id: 'step2-dinner',
         userMessage: 'Maybe dinner first then see where the night goes?',
-        vibiResponse: 'Perfect! Okay so for dinner, what\'s the vibe - are you thinking fancy date night situation or more casual hangout with friends?',
-        vibiReasoning: '"Perfect!" acknowledges their choice, clarifies dining style through relatable scenarios, uses "situation" instead of formal "occasion"',
+        vibiResponse: '{tone:confirmation} {tone:transition} for dinner, what\'s the vibe - are you thinking fancy date night situation or more casual hangout with friends?',
+        vibiReasoning: 'Tone-matched confirmation acknowledges their choice, clarifies dining style through relatable scenarios, uses "situation" instead of formal "occasion"',
         userOptions: ['Fancy date night', 'Casual hangout with friends', 'Just me and a friend, nothing too fancy'],
         nextStepMap: {
           'Fancy date night': 'step3-fancy',
@@ -41,24 +41,24 @@ export const scenarios: Scenario[] = [
       {
         id: 'step3-casual',
         userMessage: 'Just me and a friend, nothing too fancy',
-        vibiResponse: 'Bet! And location-wise, where are you coming from? Trying to keep it close or you\'re down to move around?',
-        vibiReasoning: '"Bet!" = casual acknowledgment, practical question about location, phrases it as their preference, not a requirement',
-        userOptions: ['We\'re in Marina, but can move around', 'Anywhere in Dubai is fine', 'Keep it close to Marina'],
+        vibiResponse: '{tone:confirmation} {areaGreeting}, I can {tone:suggestion} some great spots nearby. Want to stick around {userArea} or explore somewhere else?',
+        vibiReasoning: 'Tone-matched acknowledgment, uses personalized area context, phrases it as their preference, not a requirement',
+        userOptions: ['Stay around here', 'Open to exploring', 'Somewhere close by'],
         nextStepMap: {
-          'We\'re in Marina, but can move around': 'step4-recommendation',
-          'Anywhere in Dubai is fine': 'step4-recommendation',
-          'Keep it close to Marina': 'step4-marina',
+          'Stay around here': 'step4-marina',
+          'Open to exploring': 'step4-recommendation',
+          'Somewhere close by': 'step4-marina',
         },
       },
       {
         id: 'step4-recommendation',
-        userMessage: 'We\'re in Marina, but can move around',
-        vibiResponse: 'Okay so check it out - if you wanna stay in Marina, Pier 7 has some solid options. But honestly? Head to DIFC, hit up Ninive for dinner. The rooftop\'s insane, food\'s great, and you\'re literally right next to all the good bars after. Way better flow for the night.',
-        vibiReasoning: 'Gives local option first (respects their location), BUT provides opinionated recommendation with reasoning, explains the "why" - good food + strategic location',
-        userOptions: ['Ooh Ninive sounds good! What about after?', 'I think I\'ll stick to Marina', 'Tell me more about Ninive'],
+        userMessage: 'Open to exploring',
+        vibiResponse: '{tone:transition} check it out - {areaGreeting}, I\'d {tone:suggestion} heading to DIFC for Ninive. The rooftop\'s insane, food\'s great, and you\'re literally right next to all the good bars after. Way better flow for the night.',
+        vibiReasoning: 'Uses tone-matched transition and suggestions, personalized area greeting acknowledges their location, provides opinionated recommendation with reasoning, explains the "why" - good food + strategic location',
+        userOptions: ['Ooh Ninive sounds good! What about after?', 'I think I\'ll stick local', 'Tell me more about Ninive'],
         nextStepMap: {
           'Ooh Ninive sounds good! What about after?': 'step5-after',
-          'I think I\'ll stick to Marina': 'step4-marina',
+          'I think I\'ll stick local': 'step4-marina',
           'Tell me more about Ninive': 'step5-after',
         },
       },
@@ -147,8 +147,8 @@ export const scenarios: Scenario[] = [
       {
         id: 'step1',
         userMessage: 'I\'m bored, what should I do today?',
-        vibiResponse: 'Okay let\'s fix that! First quick thing - are you bored at home wanting to get out, or you\'re already out and need ideas?',
-        vibiReasoning: 'Immediate action tone ("let\'s fix that"), critical first split: location status',
+        vibiResponse: '{tone:greeting} {tone:encouragement}, let\'s fix that! First quick thing - are you bored at home wanting to get out, or you\'re already out and need ideas?',
+        vibiReasoning: 'Personalized greeting with tone-matched encouragement ("I feel you" for supportive, "Love it!" for enthusiastic), immediate action tone, critical first split: location status',
         userOptions: ['I\'m at home just doing nothing', 'I\'m already out'],
         nextStepMap: {
           'I\'m at home just doing nothing': 'step2-home',
@@ -158,8 +158,8 @@ export const scenarios: Scenario[] = [
       {
         id: 'step2-home',
         userMessage: 'I\'m at home just doing nothing',
-        vibiResponse: 'Alright, so do you actually WANT to leave the house or are you kinda feeling lazy and want something to do at home?',
-        vibiReasoning: 'Addresses motivation level, "kinda feeling lazy" normalizes low energy, offers both paths',
+        vibiResponse: '{tone:transition}, so do you actually WANT to leave the house or are you kinda feeling lazy and want something to do at home?',
+        vibiReasoning: 'Tone-matched transition ("Alright" for supportive, "Okay so" for enthusiastic, "Now then" for sophisticated), addresses motivation level, normalizes low energy, offers both paths',
         userOptions: ['I should probably get out', 'I want to stay home'],
         nextStepMap: {
           'I should probably get out': 'step3-getout',
@@ -169,8 +169,8 @@ export const scenarios: Scenario[] = [
       {
         id: 'step3-getout',
         userMessage: 'I should probably get out',
-        vibiResponse: 'Okay good! So what sounds less boring to you right now - doing something active like a workout or activity, or more like going somewhere to eat/hang out?',
-        vibiReasoning: 'Offers active vs passive options, uses "less boring" instead of "exciting" (matches their energy)',
+        vibiResponse: '{tone:confirmation} {tone:transition} what sounds less boring to you right now - doing something active like a workout or activity, or more like going somewhere to eat/hang out?',
+        vibiReasoning: 'Tone-matched confirmation and transition, offers active vs passive options, uses "less boring" instead of "exciting" (matches their energy)',
         userOptions: ['Something active', 'Somewhere to hang out'],
         nextStepMap: {
           'Something active': 'step4-active',
@@ -191,7 +191,7 @@ export const scenarios: Scenario[] = [
       {
         id: 'step5-solo',
         userMessage: 'Just me',
-        vibiResponse: 'Okay perfect. So here\'s the thing - boredom usually means you need a change of scenery. Since it\'s Wednesday midday, I\'m gonna say go to the beach. Hear me out - Kite Beach has good vibes, you can grab food at Salt, walk around, maybe rent a bike if you\'re feeling it. It\'s chill enough that you won\'t feel weird being alone, but there\'s stuff happening so you won\'t be bored.\n\nOr if you\'re not feeling beach energy, go to a good cafe with your laptop or a book - Common Grounds in Jumeirah has outdoor seating and good people-watching. Sometimes you just need to be around people doing their thing, you know?',
+        vibiResponse: '{tone:confirmation} {userName}. So here\'s the thing - boredom usually means you need a change of scenery. {areaGreeting}, I\'d {tone:suggestion} heading to the beach. Hear me out - Kite Beach has good vibes, you can grab food at Salt, walk around, maybe rent a bike if you\'re feeling it. It\'s chill enough that you won\'t feel weird being alone, but there\'s stuff happening so you won\'t be bored.\n\nOr if you\'re not feeling beach energy, {tone:suggestion} hitting up a good cafe with your laptop or a book - Common Grounds in Jumeirah has outdoor seating and good people-watching. Sometimes you just need to be around people doing their thing, you know?',
         vibiReasoning: 'Addresses root cause ("change of scenery"), two complete suggestions, acknowledges solo comfort',
         userOptions: ['Beach actually sounds good', 'Cafe sounds better'],
         nextStepMap: {

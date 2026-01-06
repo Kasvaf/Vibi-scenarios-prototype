@@ -185,6 +185,7 @@ function App() {
           onSelectOption={handleSelectOption}
           showReasoning={showReasoning}
           isWaitingForResponse={isWaitingForResponse}
+          userProfile={userProfile}
         />
       </div>
 
