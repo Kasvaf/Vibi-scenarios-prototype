@@ -38,3 +38,28 @@ export interface Scenario {
   keyHighlights: string[];
   pattern: string;
 }
+
+// User Profile for personalization
+export interface UserProfile {
+  // Required fields (collected in onboarding)
+  name: string;                    // User's name (e.g., "Sarah")
+  area: string;                    // Dubai area (e.g., "Marina / JBR")
+  vibePreference: string;          // Vibe choice (e.g., "Chill & budget-friendly")
+
+  // Derived from vibePreference (for personalization)
+  tone: 'supportive' | 'enthusiastic' | 'sophisticated' | 'adaptive';
+  budgetLevel: 'low' | 'mid' | 'high' | 'flexible';
+
+  // Metadata
+  createdAt: string;               // ISO timestamp
+  lastActive: string;              // ISO timestamp (updated each session)
+  completedOnboarding: boolean;    // true after finishing onboarding flow
+}
+
+// Vibe mapping for tone and budget inference
+export interface VibeMappingEntry {
+  tone: 'supportive' | 'enthusiastic' | 'sophisticated' | 'adaptive';
+  budget: 'low' | 'mid' | 'high' | 'flexible';
+}
+
+export type VibeMapping = Record<string, VibeMappingEntry>;

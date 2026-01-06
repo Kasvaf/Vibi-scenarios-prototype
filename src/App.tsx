@@ -1,17 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { ScenarioSelector } from './components/ScenarioSelector';
 import { ChatContainer } from './components/ChatContainer';
+import { OnboardingFlow } from './components/onboarding/OnboardingFlow';
 import { scenarios } from './data/scenarios';
-import { Message, ConversationStep } from './types';
+import { Message, ConversationStep, UserProfile } from './types';
+import { loadProfile, updateProfile } from './utils/profileStorage';
 
 function App() {
+  // User profile and onboarding state
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  // Scenario state
   const [selectedScenarioId, setSelectedScenarioId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentStepId, setCurrentStepId] = useState<string | null>(null);
   const [userOptions, setUserOptions] = useState<string[]>([]);
   const [showReasoning, setShowReasoning] = useState(false);
   const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
+
+  // Check for existing profile on mount
+  useEffect(() => {
+    const profile = loadProfile();
+    if (profile) {
+      setUserProfile(profile);
+      // Update last active timestamp
+      updateProfile({ lastActive: new Date().toISOString() });
+    } else {
+      // No profile, show onboarding
+      setShowOnboarding(true);
+    }
+  }, []);
 
   const selectedScenario = scenarios.find((s) => s.id === selectedScenarioId);
 
@@ -121,6 +141,17 @@ function App() {
     setShowReasoning(!showReasoning);
   };
 
+  const handleOnboardingComplete = (profile: UserProfile) => {
+    setUserProfile(profile);
+    setShowOnboarding(false);
+  };
+
+  // Show onboarding flow for first-time users
+  if (showOnboarding) {
+    return <OnboardingFlow onComplete={handleOnboardingComplete} />;
+  }
+
+  // Main app for users with profiles
   return (
     <div className="h-screen flex flex-col bg-gray-100">
       <Header
@@ -128,6 +159,7 @@ function App() {
         onReset={handleReset}
         showReasoning={showReasoning}
         onToggleReasoning={handleToggleReasoning}
+        userName={userProfile?.name}
       />
       <ScenarioSelector
         scenarios={scenarios}

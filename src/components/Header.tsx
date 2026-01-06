@@ -5,16 +5,19 @@ interface HeaderProps {
   onReset: () => void;
   showReasoning: boolean;
   onToggleReasoning: () => void;
+  userName?: string;
 }
 
-export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasoning }: HeaderProps) {
+export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasoning, userName }: HeaderProps) {
   return (
     <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 shadow-lg">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Bot className="w-8 h-8" />
           <div>
-            <h1 className="text-2xl font-bold">Vibi Simulator</h1>
+            <h1 className="text-2xl font-bold">
+              {userName ? `Hey ${userName}! 👋` : 'Vibi Simulator'}
+            </h1>
             {scenarioTitle && (
               <p className="text-sm text-blue-100">Scenario: {scenarioTitle}</p>
             )}
