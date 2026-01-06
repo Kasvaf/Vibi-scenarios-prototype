@@ -4,6 +4,7 @@ import { ScenarioSelector } from './components/ScenarioSelector';
 import { ChatContainer } from './components/ChatContainer';
 import { OnboardingFlow } from './components/onboarding/OnboardingFlow';
 import { ProfileEditor } from './components/ProfileEditor';
+import { ScenarioCategoriesOverview } from './components/ScenarioCategoriesOverview';
 import { scenarios } from './data/scenarios';
 import { Message, ConversationStep, UserProfile } from './types';
 import { loadProfile, updateProfile, clearProfile } from './utils/profileStorage';
@@ -14,6 +15,7 @@ function App() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showProfileEditor, setShowProfileEditor] = useState(false);
+  const [showCategoriesOverview, setShowCategoriesOverview] = useState(false);
 
   // Scenario state
   const [selectedScenarioId, setSelectedScenarioId] = useState<string | null>(null);
@@ -258,6 +260,7 @@ function App() {
           onRestartOnboarding={handleRestartOnboarding}
           aiMode={aiMode}
           onToggleAI={handleToggleAI}
+          onShowCategories={() => setShowCategoriesOverview(true)}
         />
         {!aiMode && (
           <ScenarioSelector
@@ -284,6 +287,14 @@ function App() {
           profile={userProfile}
           onClose={() => setShowProfileEditor(false)}
           onSave={handleProfileUpdate}
+        />
+      )}
+
+      {/* Categories Overview Modal */}
+      {showCategoriesOverview && (
+        <ScenarioCategoriesOverview
+          scenarios={scenarios}
+          onClose={() => setShowCategoriesOverview(false)}
         />
       )}
     </>

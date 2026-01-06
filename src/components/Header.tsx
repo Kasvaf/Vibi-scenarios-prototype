@@ -1,4 +1,4 @@
-import { Bot, Settings, RotateCcw } from 'lucide-react';
+import { Bot, Settings, RotateCcw, LayoutGrid } from 'lucide-react';
 
 interface HeaderProps {
   scenarioTitle: string;
@@ -10,9 +10,10 @@ interface HeaderProps {
   onRestartOnboarding?: () => void;
   aiMode?: boolean;
   onToggleAI?: () => void;
+  onShowCategories?: () => void;
 }
 
-export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasoning, userName, onEditProfile, onRestartOnboarding, aiMode, onToggleAI }: HeaderProps) {
+export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasoning, userName, onEditProfile, onRestartOnboarding, aiMode, onToggleAI, onShowCategories }: HeaderProps) {
   return (
     <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 shadow-lg">
       <div className="flex items-center justify-between">
@@ -28,6 +29,16 @@ export function Header({ scenarioTitle, onReset, showReasoning, onToggleReasonin
           </div>
         </div>
         <div className="flex gap-2">
+          {onShowCategories && (
+            <button
+              onClick={onShowCategories}
+              className="px-4 py-2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg text-sm transition-colors flex items-center gap-2"
+              title="View Categories"
+            >
+              <LayoutGrid size={16} />
+              Categories
+            </button>
+          )}
           {userName && onEditProfile && (
             <button
               onClick={onEditProfile}
