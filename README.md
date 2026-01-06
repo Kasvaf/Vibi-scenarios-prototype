@@ -1,64 +1,278 @@
-# Vibi - Dubai's AI Experience Companion
+# Vibi - Dubai AI Chatbot Prototype & Data Infrastructure
 
-> A conversational chatbot simulation designed to help users discover experiences in Dubai through natural, friendly dialogue.
+> Complete working prototype demonstrating Vibi's conversation design and data pipeline for Dubai experiences.
 
-## What is Vibi?
+## 🎯 What's This?
 
-Vibi is a voice-first chatbot that acts like your expert friend in Dubai, helping you find:
-- Places to go tonight
-- Activities for lazy days
-- Parties and events
-- Trendy spots and hidden gems
+This repository contains a **complete working prototype** with:
 
-This repository contains **scenarios and conversation flows** that demonstrate how Vibi creates natural, engaging interactions - moving beyond typical robotic Q&A to feel like talking to a real friend.
+1. **React Simulator** - 13 interactive conversation scenarios showing Vibi's personality
+2. **Backend Data Pipeline** - Instagram scraping, AI event extraction, venue data
+3. **Complete Documentation** - Everything your team needs to build production Vibi
 
-## Project Purpose
+**This is ready for your coworkers to use and build upon!**
 
-This is a **simulation/prototype** designed to:
-- Showcase different user scenarios and how Vibi responds
-- Define the conversation personality and tone
-- Map out dialogue flows for various use cases
-- Demonstrate the user experience to stakeholders
+## 🚀 Quick Start
 
-## Project Structure
+### Run the Conversation Simulator
+```bash
+npm install
+npm run dev
+```
+**Access at:** http://localhost:5001
+
+See 13 interactive scenarios demonstrating Vibi's conversation style!
+
+### Run the Backend Demo
+```bash
+cd backend
+npm install
+# Add API keys to .env (see docs/SETUP-GUIDE.md)
+npm run demo
+```
+
+Watch real data flowing: Instagram → Claude AI → Google Maps!
+
+## 📁 What's Inside
 
 ```
-vibi/
-├── scenarios/              # Interactive scenario demos with sample conversations
-├── conversation-flows/     # Flow diagrams and conversation scripts
-├── docs/                   # Design guidelines and personality rules
-├── src/                    # Simple web interface for simulation
-└── README.md              # This file
+Vibi/
+├── src/                      # Frontend: React chat simulator
+│   ├── data/scenarios.ts     # 13 interactive conversation scenarios
+│   ├── components/           # Chat UI (MessageBubble, ChatContainer, etc.)
+│   └── types.ts              # TypeScript definitions
+│
+├── backend/                  # Backend: Data pipeline & services
+│   ├── src/services/
+│   │   ├── instagram.service.ts     # Apify Instagram scraping
+│   │   ├── claude.service.ts        # Claude AI event extraction
+│   │   ├── google-maps.service.ts   # Google Maps venue data
+│   │   └── platinumlist.service.ts  # Concert scraping
+│   ├── src/demo.ts          # Complete working example
+│   └── README.md            # Backend documentation
+│
+├── docs/                     # Documentation for your team
+│   ├── SETUP-GUIDE.md       # 📖 START HERE - Complete setup guide
+│   ├── QUICK-REFERENCE.md   # Quick commands and examples
+│   └── AI-TRAINING-GUIDE.md # For training other AI systems
+│
+├── scenarios/                # Original markdown scenarios
+│   └── *.md                  # 9 detailed scenario documents
+│
+└── README.md                 # This file
 ```
 
-## Key Features
+## 📚 Documentation for Your Team
 
-- **Natural Conversations**: Context-aware responses that remember previous exchanges
-- **Personality**: Trendy, knowledgeable Dubai expert with a friendly vibe
-- **Voice-First**: Designed for voice message interactions
-- **Scenario-Based**: Multiple use cases demonstrating different user needs
+**Start here:** [docs/SETUP-GUIDE.md](docs/SETUP-GUIDE.md)
 
-## Getting Started
+1. **[Setup Guide](docs/SETUP-GUIDE.md)** - Step-by-step instructions to get everything running
+2. **[Quick Reference](docs/QUICK-REFERENCE.md)** - Common commands and code examples
+3. **[Backend README](backend/README.md)** - Technical details and API usage
+4. **[AI Training Guide](AI-TRAINING-GUIDE.md)** - For transferring knowledge to other AI
 
-### For Product/Design Review:
-1. Read `AI-TRAINING-GUIDE.md` for complete overview
-2. Explore `/scenarios` folder to see example conversations
-3. Check `/docs` for detailed conversation design principles
+## 🎭 The 13 Interactive Scenarios
 
-### For AI Training/Transfer:
-1. **Start with** `AI-TRAINING-GUIDE.md` - Complete knowledge consolidation
-2. **Then read** `docs/conversation-design-guide.md` - Personality details
-3. **Study** 2-3 scenarios from `/scenarios` - See principles in action
-4. **Reference** remaining scenarios as needed
+Try them in the simulator at http://localhost:5001
 
-### For Development:
-- Run the simulation interface (coming soon)
+| Scenario | Pattern | Use Case | Budget Range |
+|----------|---------|----------|--------------|
+| **Tonight Plans** | Fast-paced, decisive | Spontaneous night out | Mid-range |
+| **I'm Bored** | Supportive, empathetic | Emotional support & ideas | Free-Mid |
+| **Girls Night Out** | Strategic, deal-focused | Ladies' night planning | Budget-conscious |
+| **Lazy Sunday** | Slow, exploratory | Relaxed weekend day | Mid-range |
+| **Birthday Party** | Consultative, detailed | Special event planning | Mid-High |
+| **First Time Dubai** | Educational, comprehensive | Tourist guide | All ranges |
+| **Surprise Me** | Bold, Vibi-led | Creative adventure | Mid-range |
+| **Girlfriend Date** | Romance-focused | Impressive date night | Mid-range |
+| **Luxury High-End** | Sophisticated, VIP | Premium nightlife | $10k+ |
+| **Beach Day** | Practical, vibe-matching | Beach planning | Free-Premium |
+| **Work From Cafe** | Productivity-focused | Remote work spots | Free-Low |
+| **Budget Date** | Resourceful, romantic | Romantic on budget | <200 AED |
+| **Concerts** | Informational, discovery | Live music events | Varies |
 
-## Development Team
+## 🔧 Backend Data Pipeline
 
-This prototype demonstrates the vision for Vibi's conversational AI experience.
+### What It Does
+
+```
+Instagram Posts (Apify) → Claude AI Extraction → Structured Events → Database
+Google Maps → Venue Data (ratings, reviews, location)
+Platinumlist → Concert Listings
+```
+
+### Services Included
+
+- ✅ **Instagram Service** - Scrapes venue posts using Apify
+- ✅ **Claude Service** - Extracts events from captions using AI
+- ✅ **Google Maps Service** - Gets venue details and reviews
+- ✅ **Platinumlist Service** - Scrapes concert listings (template)
+
+### Monthly Costs (100 Venues)
+
+| Service | Cost |
+|---------|------|
+| Instagram (Apify) | ~$7.50 |
+| Claude AI | ~$27 |
+| Google Maps | ~$2 (free tier) |
+| **Total** | **~$37/month** |
+
+## 💡 Conversation Design Principles
+
+Every scenario demonstrates:
+- ✅ **Progressive narrowing** - Start broad, get specific through conversation
+- ✅ **Opinionated guidance** - Strong recommendations with clear reasoning
+- ✅ **Energy matching** - Adapt tone to user's mood and energy level
+- ✅ **Context retention** - Remember and reference previous points
+- ✅ **Honest transparency** - Clear about costs, trade-offs, downsides
+- ✅ **Dubai expertise** - Local knowledge (ladies' nights, areas, cultural context)
+
+## 🚀 What Your Team Can Do
+
+### Product/Design Team
+- **Test conversation flows** - Use the React simulator
+- **Refine scenarios** - Edit `src/data/scenarios.ts`
+- **Add new scenarios** - Follow existing patterns
+- **Review conversation style** - See principles in action
+
+### Backend Developers
+- **Run the demo** - `cd backend && npm run demo`
+- **Extend services** - Add TripAdvisor, Zomato, etc.
+- **Build database** - PostgreSQL schema (see setup guide)
+- **Create API** - REST endpoints for frontend
+- **Schedule sync jobs** - Daily automated updates
+
+### Frontend Developers
+- **Build production UI** - Use simulator as reference
+- **Integrate real data** - Connect to backend API (replace hardcoded scenarios)
+- **Add features** - Search, filters, user preferences, history
+- **Optimize UX** - Based on simulator learnings
+
+### DevOps Team
+- **Deploy infrastructure** - AWS/GCP/Vercel
+- **Set up monitoring** - Error tracking, API usage alerts
+- **Configure CI/CD** - Automated testing and deployment
+- **Manage costs** - Monitor API usage and optimize
+
+## 📊 What's Working Right Now
+
+✅ **React Simulator** - Fully functional, 13 scenarios, toggle reasoning display
+✅ **Instagram Scraping** - Tested with real Dubai venues (Zero Gravity, Cove Beach, etc.)
+✅ **Claude AI Extraction** - Successfully extracts event data from captions
+✅ **Google Maps Integration** - Gets venue ratings, reviews, location data
+✅ **Complete Documentation** - 800+ lines covering setup, usage, examples
+✅ **Demo Script** - Working end-to-end example (`npm run demo`)
+
+## 🎯 Next Steps for Production
+
+This is a **foundation**. To build production Vibi:
+
+1. **Database Setup** (1-2 days)
+   - Set up PostgreSQL (Supabase recommended)
+   - Create schema for venues, events, reviews
+   - Add indexes for performance
+
+2. **Sync Jobs** (2-3 days)
+   - Schedule daily Instagram scraping
+   - Weekly Google Maps updates
+   - Real-time event detection
+
+3. **REST API** (3-5 days)
+   - Endpoints for events, venues, search
+   - Authentication & rate limiting
+   - Response caching
+
+4. **Frontend Integration** (3-5 days)
+   - Replace hardcoded scenarios with real data
+   - Add search and filtering
+   - User preferences and history
+
+5. **Testing & Monitoring** (Ongoing)
+   - Unit tests for all services
+   - Error tracking (Sentry)
+   - API usage monitoring
+   - Alert on failed syncs
+
+**See [docs/SETUP-GUIDE.md](docs/SETUP-GUIDE.md) for detailed implementation plan.**
+
+## 🔐 Getting API Keys
+
+You'll need:
+
+1. **Apify** (Instagram) - https://console.apify.com
+   - Free tier: 5,000 API calls/month
+
+2. **Anthropic** (Claude AI) - https://console.anthropic.com
+   - $5 free credits when you sign up
+
+3. **Google Maps Platform** - https://console.cloud.google.com
+   - $200/month free credit
+
+**Setup takes ~15 minutes.** Full instructions in [docs/SETUP-GUIDE.md](docs/SETUP-GUIDE.md)
+
+## 💻 Technology Stack
+
+**Frontend:**
+- React + TypeScript
+- Vite (build tool)
+- Tailwind CSS
+- Running on port 5001
+
+**Backend:**
+- Node.js + TypeScript
+- Apify Client (Instagram scraping)
+- Anthropic SDK (Claude AI)
+- Google Maps Services
+- Cheerio (web scraping)
+
+**Database (Next Step):**
+- PostgreSQL (Supabase recommended)
+- Vector DB for semantic search (pgvector)
+
+## 📖 Learning Resources
+
+- **Code Examples** - Check service files, heavily commented
+- **Setup Guide** - [docs/SETUP-GUIDE.md](docs/SETUP-GUIDE.md)
+- **Quick Reference** - [docs/QUICK-REFERENCE.md](docs/QUICK-REFERENCE.md)
+- **API Docs**
+  - Apify: https://docs.apify.com/
+  - Claude: https://docs.anthropic.com/
+  - Google Maps: https://developers.google.com/maps
+
+## 🤝 For Your Coworkers
+
+This prototype is designed to be:
+- ✅ **Understandable** - Heavily documented, clear code comments
+- ✅ **Runnable** - Working demos you can try in minutes
+- ✅ **Extensible** - Solid foundation to build production features
+- ✅ **Educational** - Learn architecture and patterns through examples
+
+## 🎉 You're Ready!
+
+Everything you need is here:
+
+1. ✅ **Working simulator** - See Vibi's conversation style
+2. ✅ **Data pipeline** - Instagram, Claude AI, Google Maps
+3. ✅ **Complete docs** - Setup guides and examples
+4. ✅ **Demo script** - Run end-to-end pipeline
+5. ✅ **Foundation code** - Services, types, architecture
+
+**Start building production Vibi!**
 
 ---
 
-**Status**: In Development
+## 📞 Getting Help
+
+1. **Setup issues?** → [docs/SETUP-GUIDE.md](docs/SETUP-GUIDE.md)
+2. **API questions?** → [backend/README.md](backend/README.md)
+3. **Quick reference?** → [docs/QUICK-REFERENCE.md](docs/QUICK-REFERENCE.md)
+4. **Code questions?** → Check comments in service files
+
+---
+
+**Built with Claude Code** 🤖
+
+*Complete working prototype - Ready for your team to build production Vibi!*
+
+**Status**: Production-Ready Foundation
 **Last Updated**: January 2026
