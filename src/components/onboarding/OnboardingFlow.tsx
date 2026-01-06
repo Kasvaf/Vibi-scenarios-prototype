@@ -11,6 +11,14 @@ const vibeMapping: VibeMapping = {
   "🎯 Mix it up / Depends on mood": { tone: "adaptive", budget: "flexible" }
 };
 
+// Vibe category mapping
+const vibeCategoryMapping: Record<string, 'lazy' | 'adventurous' | 'sporty' | 'clubbing'> = {
+  '😴 Lazy Vibes - Chill & relaxed': 'lazy',
+  '🗺️ Adventurous Vibes - Explore & discover': 'adventurous',
+  '🏃 Sporty Vibes - Active & fit': 'sporty',
+  '🎉 Clubbing Vibes - Party & nightlife': 'clubbing',
+};
+
 interface OnboardingFlowProps {
   onComplete: (profile: UserProfile) => void;
 }
@@ -21,6 +29,7 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
   const [area, setArea] = useState('');
   const [customArea, setCustomArea] = useState('');
   const [showCustomAreaInput, setShowCustomAreaInput] = useState(false);
+  const [vibePreference, setVibePreference] = useState('');
 
   // Step 1: Name collection
   const handleNameSubmit = (value: string) => {
@@ -46,7 +55,13 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
   };
 
   // Step 3: Vibe + Budget selection
-  const handleVibeSelect = (vibePreference: string) => {
+  const handleVibeSelect = (vibe: string) => {
+    setVibePreference(vibe);
+    setStep(4);
+  };
+
+  // Step 4: Vibe category selection
+  const handleVibeCategorySelect = (vibeCategoryChoice: string) => {
     // Get tone and budget from vibe mapping
     const mapping = vibeMapping[vibePreference];
 
@@ -55,11 +70,15 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
       return;
     }
 
+    // Get vibe category from mapping
+    const vibeCat = vibeCategoryMapping[vibeCategoryChoice];
+
     // Create complete profile
     const profile: UserProfile = {
       name,
       area,
       vibePreference,
+      vibeCategory: vibeCat,
       tone: mapping.tone,
       budgetLevel: mapping.budget,
       createdAt: new Date().toISOString(),
@@ -88,7 +107,7 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
 
         {/* Progress indicator */}
         <div className="flex justify-center gap-2 mb-8">
-          {[1, 2, 3].map((stepNum) => (
+          {[1, 2, 3, 4].map((stepNum) => (
             <div
               key={stepNum}
               className={`h-2 w-16 rounded-full transition-colors ${
@@ -138,7 +157,7 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
         {/* Step 3: Vibe + Budget */}
         {step === 3 && (
           <OnboardingStep
-            message={`Last thing - what's usually your vibe when you go out? Helps me match your energy!`}
+            message={`Great! What's usually your vibe when you go out? Helps me match your energy and budget!`}
             inputType="options"
             options={[
               "😊 Chill & budget-friendly",
@@ -147,6 +166,21 @@ export function OnboardingFlow({ onComplete }: OnboardingFlowProps) {
               "🎯 Mix it up / Depends on mood"
             ]}
             onComplete={handleVibeSelect}
+          />
+        )}
+
+        {/* Step 4: Vibe Category */}
+        {step === 4 && (
+          <OnboardingStep
+            message={`Last one - what kind of mood are you usually in for Dubai experiences?`}
+            inputType="options"
+            options={[
+              "😴 Lazy Vibes - Chill & relaxed",
+              "🗺️ Adventurous Vibes - Explore & discover",
+              "🏃 Sporty Vibes - Active & fit",
+              "🎉 Clubbing Vibes - Party & nightlife"
+            ]}
+            onComplete={handleVibeCategorySelect}
           />
         )}
       </div>

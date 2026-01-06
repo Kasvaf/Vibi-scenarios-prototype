@@ -37,6 +37,7 @@ export interface Scenario {
   alternativePaths?: AlternativePath[];
   keyHighlights: string[];
   pattern: string;
+  vibeCategory?: 'lazy' | 'adventurous' | 'sporty' | 'clubbing';
 }
 
 // User Profile for personalization
@@ -45,6 +46,7 @@ export interface UserProfile {
   name: string;                    // User's name (e.g., "Sarah")
   area: string;                    // Dubai area (e.g., "Marina / JBR")
   vibePreference: string;          // Vibe choice (e.g., "Chill & budget-friendly")
+  vibeCategory?: 'lazy' | 'adventurous' | 'sporty' | 'clubbing';  // Mood preference
 
   // Derived from vibePreference (for personalization)
   tone: 'supportive' | 'enthusiastic' | 'sophisticated' | 'adaptive';

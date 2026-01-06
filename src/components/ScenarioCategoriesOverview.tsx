@@ -21,6 +21,16 @@ export function ScenarioCategoriesOverview({ scenarios, onClose }: ScenarioCateg
   // Categorize scenarios
   const categories: Category[] = [
     {
+      id: 'vibes',
+      name: 'Vibes & Moods',
+      icon: <Sparkles size={24} />,
+      color: 'text-indigo-700',
+      bgColor: 'bg-indigo-50',
+      borderColor: 'border-indigo-300',
+      description: 'Mood-based experiences tailored to how you\'re feeling',
+      scenarioIds: ['lazy-sunday', 'lazy-beach-day', 'dubai-explorer', 'fitness-wellness', 'club-hopping-night'],
+    },
+    {
       id: 'nightlife',
       name: 'Nightlife & Social',
       icon: <TrendingUp size={24} />,
@@ -28,7 +38,7 @@ export function ScenarioCategoriesOverview({ scenarios, onClose }: ScenarioCateg
       bgColor: 'bg-purple-50',
       borderColor: 'border-purple-300',
       description: 'Spontaneous nights out, parties, and social gatherings',
-      scenarioIds: ['tonight-plans', 'girls-night', 'lazy-sunday', 'luxury-clubs'],
+      scenarioIds: ['tonight-plans', 'girls-night', 'luxury-clubs'],
     },
     {
       id: 'romance',
