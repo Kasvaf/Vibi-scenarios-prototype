@@ -1856,8 +1856,8 @@ export const scenarios: Scenario[] = [
     pattern: 'Practical, food-focused',
   },
   {
-    id: 'luxury-dining',
-    title: 'Luxury Dining',
+    id: 'fine-dining',
+    title: 'Fine Dining',
     description: 'World-class fine dining experiences in Dubai',
     persona: {
       name: 'Victoria',
@@ -1983,5 +1983,55 @@ export const scenarios: Scenario[] = [
     ],
     keyHighlights: ['Trending spots', 'Food scene', 'Latest openings'],
     pattern: 'Trend-focused, foodie',
+  },
+  {
+    id: 'breakfast-experience',
+    title: 'Breakfast Experience',
+    description: 'Start your day right with the best breakfast spots in Dubai',
+    persona: {
+      name: 'Sophia',
+      age: 29,
+      situation: 'Morning person looking for a great breakfast',
+      mood: 'Energized, ready to start the day',
+      time: 'Saturday, 8 AM',
+    },
+    initialMessage: 'Where can I get a great breakfast in Dubai?',
+    conversationFlow: [
+      {
+        id: 'step1',
+        userMessage: 'Where can I get a great breakfast in Dubai?',
+        vibiResponse: '{tone:greeting} Morning! Love a good breakfast start. Are you thinking quick coffee and pastry, full brunch spread, or healthy/fitness-focused breakfast?',
+        vibiReasoning: 'Establishes breakfast style preference: quick vs full vs healthy',
+        userOptions: ['Quick coffee and pastry', 'Full brunch spread', 'Healthy/fitness-focused'],
+        nextStepMap: {
+          'Quick coffee and pastry': 'step2-quick',
+          'Full brunch spread': 'step2-brunch',
+          'Healthy/fitness-focused': 'step2-healthy',
+        },
+      },
+      {
+        id: 'step2-quick',
+        userMessage: 'Quick coffee and pastry',
+        vibiResponse: 'Perfect for a quick start: % Arabica (specialty coffee, amazing pastries, 30-50 AED), Tom&Serg (industrial vibes, great coffee, 40-70 AED), or Common Grounds (local chain, solid coffee, 25-45 AED). In and out!',
+        vibiReasoning: 'Quick breakfast spots with coffee focus, pricing range',
+        userOptions: ['Perfect!'],
+      },
+      {
+        id: 'step2-brunch',
+        userMessage: 'Full brunch spread',
+        vibiResponse: 'Go big with: Publique (DIFC, French-inspired, 120-180 AED), Baker & Spice (fresh everything, 80-150 AED), or LOWE (Dubai Marina, Aussie-style brunch, 100-160 AED). Full spread, worth the splurge!',
+        vibiReasoning: 'Premium brunch spots with full menu options, higher pricing',
+        userOptions: ['Love it!'],
+      },
+      {
+        id: 'step2-healthy',
+        userMessage: 'Healthy/fitness-focused',
+        vibiResponse: 'Healthy breakfast winners: Wild & The Moon (plant-based, acai bowls, 50-80 AED), Bounty Beets (organic, protein-packed, 60-90 AED), or SEVA (Dubai Marina, healthy bowls, 55-85 AED). Fuel up right!',
+        vibiReasoning: 'Health-focused breakfast spots with nutritious options, moderate pricing',
+        userOptions: ['Awesome!'],
+      },
+    ],
+    keyHighlights: ['Breakfast spots', 'Morning vibes', 'Coffee culture'],
+    pattern: 'Morning-focused, lifestyle',
   },
 ];

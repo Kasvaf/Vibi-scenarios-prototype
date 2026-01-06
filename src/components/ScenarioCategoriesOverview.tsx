@@ -83,7 +83,7 @@ export function ScenarioCategoriesOverview({ scenarios, onClose }: ScenarioCateg
       bgColor: 'bg-emerald-50',
       borderColor: 'border-emerald-300',
       description: 'From budget eats to fine dining, beachfront to trending spots',
-      scenarioIds: ['budget-dining', 'luxury-dining', 'beachfront-dining', 'trending-restaurants'],
+      scenarioIds: ['budget-dining', 'fine-dining', 'beachfront-dining', 'trending-restaurants', 'breakfast-experience'],
     },
   ];
 
@@ -126,8 +126,8 @@ export function ScenarioCategoriesOverview({ scenarios, onClose }: ScenarioCateg
           </button>
         </div>
 
-        {/* Content - No scrolling */}
-        <div className="p-6">
+        {/* Content - Scrollable */}
+        <div className="flex-1 overflow-y-auto p-6">
           {/* Compact Stats Bar */}
           <div className="flex items-center justify-center gap-8 py-2 bg-gray-50 border-y border-gray-200 mb-3">
             <div className="flex items-center gap-2">
