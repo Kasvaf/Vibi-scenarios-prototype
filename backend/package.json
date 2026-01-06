@@ -4,6 +4,7 @@
   "description": "Vibi data pipeline and API - Instagram scraping, Claude event extraction, Google Maps integration",
   "main": "dist/index.js",
   "scripts": {
+    "demo": "tsx src/demo.ts",
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
