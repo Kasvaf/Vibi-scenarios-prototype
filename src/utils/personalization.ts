@@ -266,14 +266,14 @@ export function personalizeMessage(
 
   let personalized = message;
 
-  // Step 1: Inject name
-  personalized = injectName(personalized, profile.name);
+  // Step 1: Adjust tone (this may insert {userName} tokens)
+  personalized = adjustTone(personalized, profile.tone);
 
   // Step 2: Inject area context
   personalized = injectArea(personalized, profile.area);
 
-  // Step 3: Adjust tone
-  personalized = adjustTone(personalized, profile.tone);
+  // Step 3: Inject name (must be last to replace {userName} from tone phrases)
+  personalized = injectName(personalized, profile.name);
 
   return personalized;
 }

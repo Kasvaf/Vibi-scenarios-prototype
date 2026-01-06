@@ -6,7 +6,8 @@ import { OnboardingFlow } from './components/onboarding/OnboardingFlow';
 import { ProfileEditor } from './components/ProfileEditor';
 import { scenarios } from './data/scenarios';
 import { Message, ConversationStep, UserProfile } from './types';
-import { loadProfile, updateProfile } from './utils/profileStorage';
+import { loadProfile, updateProfile, clearProfile } from './utils/profileStorage';
+import { sendAIMessage } from './services/openrouter';
 
 function App() {
   // User profile and onboarding state
@@ -21,6 +22,11 @@ function App() {
   const [userOptions, setUserOptions] = useState<string[]>([]);
   const [showReasoning, setShowReasoning] = useState(false);
   const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
+
+  // AI mode state
+  const [aiMode, setAIMode] = useState(false);
+  const [conversationHistory, setConversationHistory] = useState<Array<{role: string; content: string}>>([]);
+  const [isAIResponding, setIsAIResponding] = useState(false);
 
   // Check for existing profile on mount
   useEffect(() => {
@@ -157,6 +163,82 @@ function App() {
     setShowProfileEditor(false);
   };
 
+  const handleRestartOnboarding = () => {
+    // Clear profile from localStorage
+    clearProfile();
+    // Reset app state
+    setUserProfile(null);
+    setShowOnboarding(true);
+    // Reset scenario state
+    setSelectedScenarioId(null);
+    setMessages([]);
+    setCurrentStepId(null);
+    setUserOptions([]);
+    setIsWaitingForResponse(false);
+  };
+
+  const handleAIMessage = async (userMessage: string) => {
+    // Add user message
+    const userMsg: Message = {
+      id: `user-${Date.now()}`,
+      sender: 'user',
+      content: userMessage
+    };
+    setMessages(prev => [...prev, userMsg]);
+    setIsAIResponding(true);
+
+    try {
+      // Call OpenRouter
+      const aiResponse = await sendAIMessage(
+        userMessage,
+        conversationHistory,
+        userProfile!
+      );
+
+      // Add AI response
+      setMessages(prev => [...prev, {
+        id: `vibi-${Date.now()}`,
+        sender: 'vibi',
+        content: aiResponse
+      }]);
+
+      // Update history
+      setConversationHistory(prev => [
+        ...prev,
+        { role: 'user', content: userMessage },
+        { role: 'assistant', content: aiResponse }
+      ]);
+    } catch (error) {
+      console.error('AI error:', error);
+      setMessages(prev => [...prev, {
+        id: `error-${Date.now()}`,
+        sender: 'vibi',
+        content: 'Sorry, I had trouble responding. Try again?'
+      }]);
+    } finally {
+      setIsAIResponding(false);
+    }
+  };
+
+  const handleToggleAI = () => {
+    setAIMode(!aiMode);
+    // Clear messages when switching modes
+    setMessages([]);
+    setConversationHistory([]);
+    setSelectedScenarioId(null);
+    setCurrentStepId(null);
+    setUserOptions([]);
+
+    if (!aiMode) {
+      // Entering AI mode - show welcome message
+      setMessages([{
+        id: 'ai-welcome',
+        sender: 'vibi',
+        content: `Hey ${userProfile?.name}! I'm now in AI mode. Ask me anything about Dubai experiences!`
+      }]);
+    }
+  };
+
   // Show onboarding flow for first-time users
   if (showOnboarding) {
     return <OnboardingFlow onComplete={handleOnboardingComplete} />;
@@ -173,19 +255,26 @@ function App() {
           onToggleReasoning={handleToggleReasoning}
           userName={userProfile?.name}
           onEditProfile={handleEditProfile}
+          onRestartOnboarding={handleRestartOnboarding}
+          aiMode={aiMode}
+          onToggleAI={handleToggleAI}
         />
-        <ScenarioSelector
-          scenarios={scenarios}
-          selectedScenarioId={selectedScenarioId}
-          onSelectScenario={handleSelectScenario}
-        />
+        {!aiMode && (
+          <ScenarioSelector
+            scenarios={scenarios}
+            selectedScenarioId={selectedScenarioId}
+            onSelectScenario={handleSelectScenario}
+          />
+        )}
         <ChatContainer
           messages={messages}
           userOptions={userOptions}
           onSelectOption={handleSelectOption}
           showReasoning={showReasoning}
-          isWaitingForResponse={isWaitingForResponse}
+          isWaitingForResponse={aiMode ? isAIResponding : isWaitingForResponse}
           userProfile={userProfile}
+          aiMode={aiMode}
+          onSendMessage={aiMode ? handleAIMessage : undefined}
         />
       </div>
 
